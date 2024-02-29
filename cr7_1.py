@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import japanize_matplotlib
 plt.rcParams['font.family'] = 'meiryo'
 
 # データの読み込み
@@ -201,9 +202,9 @@ def plot_favorite_victims(data):
     ユーザーは表示する「犠牲者」の数を選択でき、
     また、各バー上の得点数を表示するかどうかを選択できます。
     """
-    st.header('CR7 の好きな犠牲者トップ')
+    st.header('CR7 の得意な相手トップ')
     # ユーザーに表示する犠牲者の数を選択させる
-    number_of_victims = st.slider('表示する犠牲者の数:', min_value=1, max_value=20, value=10)
+    number_of_victims = st.slider('表示するチームの数:', min_value=1, max_value=20, value=10)
     # 得点数を表示するかどうか
     show_values = st.checkbox('得点数を表示する')
     # データ処理
