@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import japanize_matplotlib
 plt.rcParams['font.family'] = 'meiryo'
 
 # データの読み込み
@@ -47,9 +46,9 @@ def plot_goals_by_competition(data):
     # グラフの描画
     plt.figure(figsize=(12, 6))
     goals_by_competition.plot(kind='bar', color='teal')
-    plt.title('競技会別ゴール数')
-    plt.xlabel('競技会')
-    plt.ylabel('ゴール数')
+    plt.title('Number of Goals by Competition')
+    plt.xlabel('Competition')
+    plt.ylabel('Goals')
     plt.xticks(rotation=45)
     plt.grid(axis='y', linestyle='--')
     
@@ -116,9 +115,9 @@ def plot_average_goal_time_by_season(average_goal_time_by_season):
 
     plt.figure(figsize=(12, 6))
     filtered_data.plot(kind='bar', color=color)
-    plt.title('シーズン別平均ゴールタイム')
-    plt.xlabel('シーズン')
-    plt.ylabel('平均ゴールタイム（分）')
+    plt.title('Average Goal Times by Season')
+    plt.xlabel('Season')
+    plt.ylabel('Average Goal')
     plt.xticks(rotation=45)
     plt.grid(axis='y', linestyle='--')
     st.pyplot(plt)
@@ -156,7 +155,7 @@ def show_assist_players_list(data):
     """
     助攻队员名单とその助攻数を表示します。ユーザーは表示する名单の数を選択できます。
     """
-    st.header('助攻队员名单と助攻数')
+    st.header('アシストリストとアシスト数')
     # 表示する名单の数を選択
     number_to_display = st.slider('表示する名单の数:', min_value=1,
                                   max_value=len(data['Goal_assist'].unique()), value=10, step=1)
@@ -188,9 +187,9 @@ def plot_goals_per_club(data):
         # 棒グラフの作成
         plt.figure(figsize=(12, 6))
         goals_by_club.plot(kind='bar', color='orange')
-        plt.title('CR7 の各クラブごとの得点数')
-        plt.xlabel('クラブ')
-        plt.ylabel('得点数')
+        plt.title('Goals for Clubs')
+        plt.xlabel('Clubs')
+        plt.ylabel('Goals')
         plt.xticks(rotation=45)
     st.pyplot(plt)
 
@@ -198,8 +197,8 @@ def plot_goals_per_club(data):
 
 def plot_favorite_victims(data):
     """
-    CR7の好きな「犠牲者」トップ10をバーチャートで表示し、
-    ユーザーは表示する「犠牲者」の数を選択でき、
+    CR7の好きな「相手」トップ10をバーチャートで表示し、
+    ユーザーは表示する「相手」の数を選択でき、
     また、各バー上の得点数を表示するかどうかを選択できます。
     """
     st.header('CR7 の得意な相手トップ')
@@ -212,9 +211,9 @@ def plot_favorite_victims(data):
     # プロット
     plt.figure(figsize=(12, 8))
     favorite_victims.plot(kind='bar', color='magenta')
-    plt.title('CR7 の好きな犠牲者トップ')
-    plt.xlabel('対戦相手')
-    plt.ylabel('得点数')
+    plt.title('Top Favorite Opponents')
+    plt.xlabel('Opponent')
+    plt.ylabel('Goals')
     plt.xticks(rotation=45)
     # 得点数を表示するオプションが選択されている場合、各バー上に得点数を表示
     if show_values:
@@ -253,8 +252,8 @@ def plot_goals_by_time_quarter(data):
     plt.figure(figsize=(14, 7))
     sns.countplot(x=filtered_data['minute_column'])
     plt.xticks(rotation=45, ha='center')
-    plt.xlabel('得点した分')
-    plt.ylabel('得点数')
+    plt.xlabel('Times')
+    plt.ylabel('Goals')
     plt.title(title, fontsize=20)
     st.pyplot(plt)
 
@@ -280,9 +279,9 @@ def plot_goals_by_playing_position(data):
     # プロット
     plt.figure(figsize=(10, 6))
     goals_by_position.plot(kind='bar', color='lightgreen')
-    plt.title('プレー位置別得点数')
-    plt.xlabel('プレー位置')
-    plt.ylabel('得点数')
+    plt.title('Goals By Playing Position')
+    plt.xlabel('Position')
+    plt.ylabel('Goals')
     plt.xticks(rotation=45)
     
     # 各バー上の得点数を表示するオプションが選択されている場合、得点数を表示
@@ -312,9 +311,9 @@ def plot_goals_by_type(data):
     # プロット
     plt.figure(figsize=(10, 6))
     sns.barplot(x=goals_by_type.index, y=goals_by_type.values, palette='viridis')
-    plt.title('ゴールのタイプ別得点数')
-    plt.xlabel('ゴールのタイプ')
-    plt.ylabel('得点数')
+    plt.title('Goal Type')
+    plt.xlabel('Type')
+    plt.ylabel('Goals')
     plt.xticks(rotation=45)
     
     # 各バー上に得点数を表示するオプションが選択されている場合、得点数を表示
@@ -337,7 +336,7 @@ def plot_data(data):
         goals_in_important_matches = important_matches.groupby('Season').size()
         plt.figure(figsize=(10, 6))
         goals_in_important_matches.plot(kind='bar', color='gold')
-        plt.title('重要な試合でのゴール数（シーズン別）')
+        plt.title('Goals Scored In Important Games')
         for index, value in enumerate(goals_in_important_matches):
             plt.text(index, value, str(value), ha='center')
     elif chart_option == '勝敗ごとのゴール数':
@@ -346,7 +345,7 @@ def plot_data(data):
         goals_result = data['Result'].value_counts()
         plt.figure(figsize=(10, 6))
         goals_result.plot(kind='bar', color=['green', 'gray', 'red'])
-        plt.title('勝敗ごとのゴール数')
+        plt.title('Goals Per Win&Loss')
         for index, value in enumerate(goals_result):
             plt.text(index, value, str(value), ha='center')
     else:
@@ -354,11 +353,11 @@ def plot_data(data):
         home_away_goals = data['Venue'].value_counts()
         plt.figure(figsize=(10, 6))
         home_away_goals.plot(kind='bar', color=['darkblue', 'orange'])
-        plt.title('ホームvsアウェイのゴール数')
+        plt.title('Home vs. Away Goals')
         for index, value in enumerate(home_away_goals):
             plt.text(index, value, str(value), ha='center')
-    plt.xlabel('カテゴリ')
-    plt.ylabel('ゴール数')
+    plt.xlabel('Types')
+    plt.ylabel('Goals')
     plt.xticks(rotation=45)
     st.pyplot(plt)
 
