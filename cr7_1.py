@@ -238,16 +238,16 @@ def plot_goals_by_time_quarter(data):
     # 四半期ごとのデータフィルタリング
     if quarter_selection == '最初の25分':
         filtered_data = data.query('minute_column <= 25')
-        title = 'マッチ開始から25分以内のCR7の得点'
+        title = 'CR7 scores within 25 minutes of match start'
     elif quarter_selection == '26分から47分':
         filtered_data = data.query('minute_column > 25 and minute_column <= 47')
-        title = '26分から47分の間のCR7の得点'
+        title = 'CR7 scores between 26th and 47th minutes'
     elif quarter_selection == '48分から74分':
         filtered_data = data.query('minute_column > 47 and minute_column <= 74')
-        title = '48分から74分の間のCR7の得点'
+        title = 'CR7 scores between 48th and 74th minutes'
     else:
         filtered_data = data.query('minute_column > 74')
-        title = '75分から終了までのCR7の得点'
+        title = 'CR7 scores from the 75th minute to the end of the game'
     # グラフの描画
     plt.figure(figsize=(14, 7))
     sns.countplot(x=filtered_data['minute_column'])
