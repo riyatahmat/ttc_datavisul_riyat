@@ -182,7 +182,7 @@ def plot_goals_per_club(data):
         # 円グラフの作成
         plt.figure(figsize=(10, 6))
         plt.pie(goals_by_club, labels=goals_by_club.index, autopct='%1.1f%%', startangle=140)
-        plt.title('CR7 の各クラブごとの得点数', fontsize=20)
+        plt.title('Goals for Clubs', fontsize=20)
     else:
         # 棒グラフの作成
         plt.figure(figsize=(12, 6))
